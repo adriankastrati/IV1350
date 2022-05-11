@@ -1,4 +1,4 @@
-package se.kth.processSale.test;
+package se.kth.processSale.model;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -8,7 +8,7 @@ import se.kth.processSale.model.Sale;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SaleTest {
-private Sale sale = new Sale();
+    private Sale sale = new Sale();
 
     @AfterEach
     public void cleanup(){

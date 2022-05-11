@@ -1,9 +1,7 @@
-package se.kth.processSale.test;
+package se.kth.processSale.model;
 
 import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
-
-import se.kth.processSale.model.CustomerPayment;
 
 class CustomerPaymentTest {
     private CustomerPayment customerPayment = new CustomerPayment();
