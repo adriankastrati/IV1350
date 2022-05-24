@@ -1,6 +1,8 @@
 package se.kth.processSale.view;
 
 import se.kth.processSale.controller.Controller;
+import se.kth.processSale.exceptions.InventoryDatabaseException;
+import se.kth.processSale.exceptions.MissingItemIDException;
 import se.kth.processSale.model.Item;
 import se.kth.processSale.model.ItemDTO;
 import se.kth.processSale.model.ItemDTO;
@@ -24,7 +26,7 @@ public class View {
     public View(Controller contr){
         this.contr = contr;
         contr.addCustomerPaymentObserver(new TotalRevenueView());
-        itemID2 = 123;
+        itemID2 = 404;
         itemID1 = 121;
     }
 
@@ -33,9 +35,31 @@ public class View {
      */
     public void hardCode(){
         contr.startSale();
-        contr.scanItem(itemID1);
-        contr.scanItem(itemID2);
-        contr.scanItem(itemID1);
+
+        try{contr.scanItem(itemID1);
+        } catch (MissingItemIDException missingItemID){
+            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
+
+        }catch (InventoryDatabaseException inventoryDatabaseDown){
+            System.out.println("Server is not available");
+        }
+
+        try{contr.scanItem(itemID2);
+        } catch (MissingItemIDException missingItemID){
+        System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
+
+        }catch (InventoryDatabaseException inventoryDatabaseDown){
+        System.out.println("Server is not available");
+        }
+
+        try {contr.scanItem(itemID1);
+        } catch (MissingItemIDException missingItemID){
+            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
+
+        }catch (InventoryDatabaseException inventoryDatabaseDown){
+            System.out.println("Server is not available");
+        }
+
         contr.endSale();
         sendItemInfoToDisplay();
         contr.paySale(250);

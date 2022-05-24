@@ -10,6 +10,5 @@ public class InventoryDatabaseException extends RuntimeException{
 
     public InventoryDatabaseException(){
         super("The inventory system server is not available");
-        System.out.println("Log: Could not connect to the inventory Database set to the controller");
     }
 }

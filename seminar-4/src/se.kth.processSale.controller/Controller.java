@@ -2,16 +2,8 @@ package se.kth.processSale.controller;
 
 import se.kth.processSale.exceptions.InventoryDatabaseException;
 import se.kth.processSale.exceptions.MissingItemIDException;
-import se.kth.processSale.integration.AccountingSystem;
-import se.kth.processSale.integration.InventorySystem;
-import se.kth.processSale.integration.Printer;
-import se.kth.processSale.model.CustomerPaymentObserver;
-import se.kth.processSale.model.Item;
-import se.kth.processSale.model.ItemDTO;
-import se.kth.processSale.model.ReceiptDTO;
-import se.kth.processSale.model.Sale;
-import se.kth.processSale.model.SaleDTO;
-import se.kth.processSale.integration.TotalRevenueFileOutput;
+import se.kth.processSale.integration.*;
+import se.kth.processSale.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +19,8 @@ public class Controller {
     private Sale saleController;
     private List<CustomerPaymentObserver> customerPaymentObservers = new ArrayList<>();
     private TotalRevenueFileOutput totalRevenueFileOutput = new TotalRevenueFileOutput();
+    private DeveloperLog developerLog = new DeveloperLog();
+
 
     /**
      * Creates a new instance of Controller
@@ -68,18 +62,19 @@ public class Controller {
      * Adds Item found in <code> InventorySystem </code> connected by <code> itemID </code> to <code>Sale</code>
      * @param itemID
      */
-    public void scanItem(int itemID){
+    public void scanItem(int itemID) throws MissingItemIDException, InventoryDatabaseException{
         ItemDTO itemDTOFromDatabase = null;
 
         try {
            itemDTOFromDatabase = inventorySystemController.getItemDTOFromDatabase(itemID);
        } catch (MissingItemIDException missingItemID){
-           System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-           return;
+            developerLog.addExceptionToLog(missingItemID.getMessage());
+            throw new MissingItemIDException(itemID);
+
        }
         catch (InventoryDatabaseException inventoryDatabaseDown){
-            System.out.println("Server is not available");
-            return;
+            developerLog.addExceptionToLog(inventoryDatabaseDown.getMessage());
+            throw new InventoryDatabaseException();
         }
 
 
