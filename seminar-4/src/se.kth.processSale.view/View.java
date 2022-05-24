@@ -26,48 +26,37 @@ public class View {
     public View(Controller contr){
         this.contr = contr;
         contr.addCustomerPaymentObserver(new TotalRevenueView());
-        itemID2 = 404;
-        itemID1 = 121;
+        itemID2 = 121;
+        itemID1 = 404;
+    }
+
+    private void fetchItem(int itemID){
+        try{contr.scanItem(itemID);
+        } catch (MissingItemIDException missingItemID){
+            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
+
+        }catch (InventoryDatabaseException inventoryDatabaseDown){
+            System.out.println("Server is not available");
+        }
     }
 
     /**
      * A hord coded sale process with three purchasing Items where two share itemID and payment with prints to Terminal
      */
     public void hardCode(){
+
         contr.startSale();
-
-        try{contr.scanItem(itemID1);
-        } catch (MissingItemIDException missingItemID){
-            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-
-        }catch (InventoryDatabaseException inventoryDatabaseDown){
-            System.out.println("Server is not available");
-        }
-
-        try{contr.scanItem(itemID2);
-        } catch (MissingItemIDException missingItemID){
-        System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-
-        }catch (InventoryDatabaseException inventoryDatabaseDown){
-        System.out.println("Server is not available");
-        }
-
-        try {contr.scanItem(itemID1);
-        } catch (MissingItemIDException missingItemID){
-            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-
-        }catch (InventoryDatabaseException inventoryDatabaseDown){
-            System.out.println("Server is not available");
-        }
-
+        fetchItem(itemID1);
+        fetchItem(itemID2);
+        fetchItem(itemID1);
         contr.endSale();
         sendItemInfoToDisplay();
         contr.paySale(250);
 
         contr.startSale();
-        contr.scanItem(itemID1);
-        contr.scanItem(itemID1);
-        contr.scanItem(itemID1);
+        fetchItem(itemID1);
+        fetchItem(itemID1);
+        fetchItem(itemID1);
         contr.endSale();
         sendItemInfoToDisplay();
         contr.paySale(300);

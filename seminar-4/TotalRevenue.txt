@@ -1,2 +1,2 @@
-Time: 13:17:25.446 | Total Current Revenue: 200.0
-Time: 13:17:25.446 | Total Current Revenue: 500.0
+Time: 21:52:10.475 | Total Current Revenue: 100.0
+Time: 21:52:10.475 | Total Current Revenue: 100.0
