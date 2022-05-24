@@ -7,10 +7,16 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalTime;
 
+/**
+ * Represents a class that is used to output a file that implements the observer interface
+ */
 public class TotalRevenueFileOutput implements CustomerPaymentObserver {
     private double totalRevenue;
     private PrintWriter logStream;
 
+    /**
+     * Creates a new file in folder that can be written to
+     */
     public TotalRevenueFileOutput(){
         try{
             logStream = new PrintWriter(new FileWriter("TotalRevenue.txt"),true);
@@ -20,6 +26,10 @@ public class TotalRevenueFileOutput implements CustomerPaymentObserver {
         }
     }
 
+    /**
+     * Implemented method that writes updated total revenue to a file
+     * @param newPayment - new payment that increases total revenue
+     */
     @Override
     public void newPayment(double newPayment) {
         totalRevenue += newPayment;

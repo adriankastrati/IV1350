@@ -48,6 +48,10 @@ public class Controller {
         inventorySystemController = inventorySystemToBeLinked;
     }
 
+    /**
+     * Adds new an observer for CustomerPayment class to the controller
+     * @param customerPaymentObserver - the observer to be added
+     */
     public void addCustomerPaymentObserver(CustomerPaymentObserver customerPaymentObserver){
         customerPaymentObservers.add(customerPaymentObserver);
     }
