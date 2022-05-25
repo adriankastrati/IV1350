@@ -27,21 +27,22 @@ public class View {
         this.contr = contr;
         contr.addCustomerPaymentObserver(new TotalRevenueView());
         itemID2 = 121;
-        itemID1 = 404;
+        itemID1 = 101;
     }
 
+    /**
+     * fetches item from through itemID
+     * @param itemID - item to be fetched
+     */
     private void fetchItem(int itemID){
         try{contr.scanItem(itemID);
-        } catch (MissingItemIDException missingItemID){
-            System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-
-        }catch (InventoryDatabaseException inventoryDatabaseDown){
-            System.out.println("Server is not available");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     /**
-     * A hord coded sale process with three purchasing Items where two share itemID and payment with prints to Terminal
+     * A hordcoded sale process with three purchasing Items where two share itemID and payment with prints to Terminal
      */
     public void hardCode(){
 

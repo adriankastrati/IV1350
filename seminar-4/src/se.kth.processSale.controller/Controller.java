@@ -60,21 +60,21 @@ public class Controller {
 
     /**
      * Adds Item found in <code> InventorySystem </code> connected by <code> itemID </code> to <code>Sale</code>
-     * @param itemID
+     * @param itemID - itemId to be searched for
+     * @throws -
      */
-    public void scanItem(int itemID) throws MissingItemIDException, InventoryDatabaseException{
+    public void scanItem(int itemID) throws OperationFailedException{
         ItemDTO itemDTOFromDatabase = null;
 
         try {
            itemDTOFromDatabase = inventorySystemController.getItemDTOFromDatabase(itemID);
        } catch (MissingItemIDException missingItemID){
             developerLog.addExceptionToLog(missingItemID.getMessage());
-            throw new MissingItemIDException(itemID);
+            throw new OperationFailedException("Item was not found in inventory", missingItemID);
 
-       }
-        catch (InventoryDatabaseException inventoryDatabaseDown){
+       } catch (InventoryDatabaseException inventoryDatabaseDown){
             developerLog.addExceptionToLog(inventoryDatabaseDown.getMessage());
-            throw new InventoryDatabaseException();
+            throw new OperationFailedException("Inventory server is down", inventoryDatabaseDown);
         }
 
 
