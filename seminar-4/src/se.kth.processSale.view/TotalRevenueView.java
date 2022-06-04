@@ -31,8 +31,8 @@ public class TotalRevenueView implements CustomerPaymentObserver {
      * Prints current state of total revenue
      */
     private void printCurrentState(){
-        System.out.println("##");
+        System.out.println("\n##");
         System.out.println("Total Revenue :" + totalRevenue);
-        System.out.println("##");
+        System.out.println("##\n");
     }
 }
