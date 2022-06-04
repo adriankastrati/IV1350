@@ -69,7 +69,6 @@ public class Controller {
         try {
            itemDTOFromDatabase = inventorySystemController.getItemDTOFromDatabase(itemID);
        } catch (MissingItemIDException missingItemID){
-            developerLog.addExceptionToLog(missingItemID.getMessage());
             throw new OperationFailedException("Item was not found in inventory", missingItemID);
 
        } catch (InventoryDatabaseException inventoryDatabaseDown){

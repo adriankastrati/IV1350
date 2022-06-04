@@ -1,12 +1,12 @@
-package se.kth.processSale.exceptions;
+package se.kth.processSale.integration;
 
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MissingItemIDExceptionTest {
+class PrinterTest {
 
     @Test
-    void getMissingItemID(){
+    void printReceipt() {
     }
 }

@@ -37,7 +37,7 @@ public class CustomerPayment {
      * @param paymentAmount - the value of paid amount
      */
     public void payAmount(double paymentAmount){
-        change =  amountToPay - paymentAmount;
+        change =  paymentAmount - amountToPay;
         paidAmount = paymentAmount;
     }
 

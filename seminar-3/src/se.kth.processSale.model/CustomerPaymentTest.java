@@ -6,6 +6,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class CustomerPaymentTest {
     private CustomerPayment customerPayment = new CustomerPayment();
 
+    @BeforeEach
+    private void reset(){
+    customerPayment = new CustomerPayment();
+    }
+
     @Test
     void increaseAmountToPaySuccess(){
         customerPayment.increaseAmountToPay(10);
@@ -25,13 +30,13 @@ class CustomerPaymentTest {
         customerPayment.increaseAmountToPay(10);
         customerPayment.payAmount(9);
         double changeTest = customerPayment.getChange();
-        assertNotEquals(2, changeTest);
+        assertEquals(-1, changeTest);
     }
 
     @Test
-    void payAmountSucess(){
+    void payAmountSuccess(){
         customerPayment.increaseAmountToPay(10);
-        customerPayment.payAmount(9);
+        customerPayment.payAmount(11);
         double changeTest = customerPayment.getChange();
         assertEquals(1, changeTest);
     }

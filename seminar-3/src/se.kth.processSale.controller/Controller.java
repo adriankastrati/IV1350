@@ -1,7 +1,5 @@
 package se.kth.processSale.controller;
 
-import se.kth.processSale.exceptions.InventoryDatabaseException;
-import se.kth.processSale.exceptions.MissingItemIDException;
 import se.kth.processSale.integration.AccountingSystem;
 import se.kth.processSale.integration.InventorySystem;
 import se.kth.processSale.integration.Printer;
@@ -33,22 +31,6 @@ public class Controller {
         printerController = printer;
     }
 
-    public void linkAccountingSystemToController(AccountingSystem AccSysToBeLinked){
-        accountSysController = AccSysToBeLinked;
-
-    }
-    public void linkInventorySystemToController(InventorySystem inventorySystemToBeLinked){
-        inventorySystemController = inventorySystemToBeLinked;
-    }
-
-    public void linkPrinterToController(Printer printerToBeLinked){
-        printerController = printerToBeLinked;
-    }
-
-    public void linkSaleToController(Sale SaleToBeLinked){
-        saleController = SaleToBeLinked;
-    }
-
     /**
      * Adds Item found in <code> InventorySystem </code> connected by <code> itemID </code> to <code>Sale</code>
      * @param itemID
@@ -56,17 +38,7 @@ public class Controller {
     public void scanItem(int itemID){
         ItemDTO itemDTOFromDatabase = null;
 
-        try {
-           itemDTOFromDatabase = inventorySystemController.getItemDTOFromDatabase(itemID);
-       } catch (MissingItemIDException missingItemID){
-           System.out.println(missingItemID.getMissingItemID() + " is not a valid itemID");
-           return;
-       }
-        catch (InventoryDatabaseException inventoryDatabaseDown){
-            System.out.println("Server is not available");
-            return;
-        }
-
+        itemDTOFromDatabase = inventorySystemController.getItemDTOFromDatabase(itemID);
 
         Item itemFromDatabase = new Item(itemDTOFromDatabase);
 
@@ -86,9 +58,16 @@ public class Controller {
      * Ends <code>Sale</code> by updating external systems with current <code>Sale</code>
      */
     public void endSale(){
-        SaleDTO saleDTO = new SaleDTO(saleController);
+        SaleDTO saleDTO = null;
+
+        try{saleDTO = new SaleDTO(saleController);
+        } catch (NullPointerException nullPointerException) {
+        return;
+        }
+
         inventorySystemController.updateQuantityFromSale(saleDTO);
         accountSysController.update(saleDTO);
+        this.saleController = null;
     }
 
     /**
@@ -110,7 +89,11 @@ public class Controller {
         return saleDTO;
     }
 
-    public ReceiptDTO printReceipt(){
-    return new ReceiptDTO(saleController.getReceiptForSale());
+    /**
+     * Get method for current sale linked to controller
+     * @return - current sale
+     */
+    public Sale getSaleController() {
+        return saleController;
     }
 }

@@ -35,9 +35,19 @@ public class View {
         contr.scanItem(itemID1);
         contr.scanItem(itemID2);
         contr.scanItem(itemID1);
-        contr.endSale();
         contr.paySale(2);
         sendItemInfoToDisplay();
+        contr.endSale();
+
+        System.out.println();
+        contr.startSale();
+        contr.scanItem(itemID2);
+        contr.scanItem(itemID2);
+        contr.scanItem(itemID1);
+        contr.paySale(2);
+        sendItemInfoToDisplay();
+        contr.endSale();
+
     }
 
     private void sendItemInfoToDisplay(){

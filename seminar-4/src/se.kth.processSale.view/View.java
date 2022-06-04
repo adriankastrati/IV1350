@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 /**
- * represent the view that a cahsier would have
+ * represent the view that a cashier would have
  */
 public class View {
     private Controller contr;
@@ -26,8 +26,9 @@ public class View {
     public View(Controller contr){
         this.contr = contr;
         contr.addCustomerPaymentObserver(new TotalRevenueView());
-        itemID2 = 121;
+        itemID2 = 404;
         itemID1 = 101;
+
     }
 
     /**
@@ -57,7 +58,7 @@ public class View {
         contr.startSale();
         fetchItem(itemID1);
         fetchItem(itemID1);
-        fetchItem(itemID1);
+        fetchItem(121);
         contr.endSale();
         sendItemInfoToDisplay();
         contr.paySale(300);

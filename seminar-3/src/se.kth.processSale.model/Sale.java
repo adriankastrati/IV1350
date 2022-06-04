@@ -73,6 +73,10 @@ public class Sale {
     public boolean isItemInSale(Item item){
         boolean isItemInSale = false;
 
+        if(item == null) {
+            return isItemInSale;
+        }
+
         for(Item itemSearch : itemsCurrentlyInSale){
             if(itemSearch.getItemID() == item.getItemID())
                 isItemInSale = true;
@@ -84,25 +88,6 @@ public class Sale {
     /**
      * adds new entered Item to Sale in quantity and object
      * @param itemToAddToSale - Item to add in Sale
-     */
-   /* public void addNewItemToSale(Item itemToAddToSale){
-        if(isItemInSale(itemToAddToSale)){
-            for(Item itemToFind : itemsCurrentlyInSale) {
-                if(itemToFind.getItemID() == itemToAddToSale.getItemID()){
-                    itemToFind.addToQuantity(1);
-                    customerPaymentForSale.increaseAmountToPay(itemToAddToSale.getPrice());
-                }
-            }
-        }
-
-        else{
-        itemsCurrentlyInSale.add(itemToAddToSale);
-
-        receiptForSale.addRow(itemToAddToSale);
-
-        customerPaymentForSale.increaseAmountToPay(itemToAddToSale.getPrice()* itemToAddToSale.getQuantity());
-        }
-    }
      */
         public void addNewItemToSale(Item itemToAddToSale){
             if(isItemInSale(itemToAddToSale)){

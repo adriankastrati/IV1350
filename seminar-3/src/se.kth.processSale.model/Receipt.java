@@ -109,32 +109,6 @@ public class Receipt {
      * @param itemToBeAddedOnReceipt - Item to be added on Receipt
      */
     public void addRow(Item itemToBeAddedOnReceipt){
-        totalVAT += itemToBeAddedOnReceipt.getVAT();
-        totalSalePrice += itemToBeAddedOnReceipt.getPrice();
-
-        String [] additionalItemNameElement = new String[receiptRowPosition + 1];
-        double [] additionalItemPriceElement = new double[receiptRowPosition + 1];
-        double [] additionalItemVATElement = new double[receiptRowPosition + 1];
-        int [] additionalItemQuantityElement = new int[receiptRowPosition+ 1];
-
-        int i = 0;
-        for(; i < receiptRowPosition; i++) {
-            additionalItemNameElement[i] = itemName[i];
-            additionalItemPriceElement[i] = itemPrice[i];
-            additionalItemVATElement[i] = itemVAT[i];
-            additionalItemQuantityElement[i] = itemQuantity[i];
-        }
-
-        itemName = additionalItemNameElement;
-        itemPrice = additionalItemPriceElement;
-        itemVAT = additionalItemVATElement;
-        itemQuantity = additionalItemQuantityElement;
-
-        itemName[receiptRowPosition] = itemToBeAddedOnReceipt.getName();
-        itemPrice[receiptRowPosition] = itemToBeAddedOnReceipt.getPrice();
-        itemVAT[receiptRowPosition] = itemToBeAddedOnReceipt.getVAT();
-        itemQuantity[receiptRowPosition] = itemToBeAddedOnReceipt.getQuantity();
-        receiptRowPosition++;
     }
 }
 
