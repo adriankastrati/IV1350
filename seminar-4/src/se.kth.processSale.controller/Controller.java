@@ -34,28 +34,12 @@ public class Controller {
         printerController = printer;
     }
 
-    public void linkAccountingSystemToController(AccountingSystem AccSysToBeLinked){
-        accountSysController = AccSysToBeLinked;
-
-    }
-    public void linkInventorySystemToController(InventorySystem inventorySystemToBeLinked){
-        inventorySystemController = inventorySystemToBeLinked;
-    }
-
     /**
      * Adds new an observer for CustomerPayment class to the controller
      * @param customerPaymentObserver - the observer to be added
      */
     public void addCustomerPaymentObserver(CustomerPaymentObserver customerPaymentObserver){
         customerPaymentObservers.add(customerPaymentObserver);
-    }
-
-    public void linkPrinterToController(Printer printerToBeLinked){
-        printerController = printerToBeLinked;
-    }
-
-    public void linkSaleToController(Sale SaleToBeLinked){
-        saleController = SaleToBeLinked;
     }
 
     /**
