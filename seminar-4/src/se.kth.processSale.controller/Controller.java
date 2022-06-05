@@ -24,9 +24,9 @@ public class Controller {
 
     /**
      * Creates a new instance of Controller
-     * @param accountSys
-     * @param invSys
-     * @param printer
+     * @param accountSys - accounting system linked to controller
+     * @param invSys - inventory system linked to controller
+     * @param printer - printer linked to controller
      */
     public Controller(AccountingSystem accountSys, InventorySystem invSys, Printer printer){
         accountSysController = accountSys;
@@ -61,7 +61,7 @@ public class Controller {
     /**
      * Adds Item found in <code> InventorySystem </code> connected by <code> itemID </code> to <code>Sale</code>
      * @param itemID - itemId to be searched for
-     * @throws -
+     * @throws OperationFailedException - thrown if there is server issues or if there is no match for ItemID in the inventriy system
      */
     public void scanItem(int itemID) throws OperationFailedException{
         ItemDTO itemDTOFromDatabase = null;
